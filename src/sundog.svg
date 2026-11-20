@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 360">
+  <defs>
+    <!-- All coordinates of each light field are set by its ellipse transform. -->
+    <radialGradient id="warm">
+      <stop stop-color="#ffe4ac" stop-opacity=".30"/>
+      <stop offset=".34" stop-color="#ffda96" stop-opacity=".18"/>
+      <stop offset=".72" stop-color="#ffd39c" stop-opacity=".055"/>
+      <stop offset="1" stop-color="#ffca91" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="silver">
+      <stop stop-color="#eaf7ff" stop-opacity=".34"/>
+      <stop offset=".5" stop-color="#c3dcf7" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#9fcafa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="amber">
+      <stop stop-color="#ffab73" stop-opacity=".55"/>
+      <stop offset=".45" stop-color="#ff9b69" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#ff9b69" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pearl">
+      <stop stop-color="#fff9db" stop-opacity=".64"/>
+      <stop offset=".42" stop-color="#ffefb9" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#ffedbc" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Each optical layer can move independently around the same point of light. -->
+  <ellipse id="bloom" cx="9" cy="119" rx="181" ry="89" fill="url(#warm)" opacity=".44"/>
+  <g id="fan" fill="url(#warm)">
+    <ellipse rx="298" ry="21" transform="translate(49 126) rotate(19)"/>
+    <ellipse rx="237" ry="7" transform="translate(41 124) rotate(27)" opacity=".74"/>
+  </g>
+  <ellipse id="shaft" rx="249" ry="9" transform="translate(48 127) rotate(34)" fill="url(#pearl)" opacity=".60"/>
+  <ellipse id="lower-ray" rx="203" ry="22" transform="translate(41 124) rotate(43)" fill="url(#warm)" opacity=".70"/>
+  <g id="prism">
+    <ellipse cx="9" cy="118" rx="72" ry="6" fill="url(#silver)"/>
+    <ellipse rx="16" ry="40" transform="translate(30 118) rotate(-8)" fill="url(#silver)"/>
+    <ellipse rx="10" ry="34" transform="translate(44 118) rotate(-8)" fill="url(#amber)"/>
+  </g>
+  <ellipse id="core" rx="13" ry="28" transform="translate(37 118) rotate(-8)" fill="url(#pearl)"/>
+</svg>

@@ -1,0 +1,23 @@
+{
+  "name": "@0xwizardof0x/season-timeline",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "An embeddable seasonal calendar, CSS palette and weather timeline.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xWizardof0x/season-timeline.git"
+  },
+  "exports": {
+    ".": "./src/season-timeline.js",
+    "./calendar": "./src/calendar.js"
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  }
+}

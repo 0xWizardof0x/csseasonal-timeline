@@ -1,0 +1,50 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  themeFor,
+  localDate,
+  localMidnight,
+  holidaysFor,
+  occasionPoints,
+  snapOccasionDay,
+  adjacentOccasionDay
+} from '../src/calendar.js';
+
+test('the widget exposes the original six Valentine palette tokens', () => {
+  const t = themeFor(new Date('2026-02-14T18:00:00Z'));
+  assert.equal(t.id, 'valentines');
+  assert.equal(t.season, 'winter');
+  assert.deepEqual(Object.keys(t.palette).sort(), [
+    'accent',
+    'border',
+    'page',
+    'secondary',
+    'soft',
+    'strong'
+  ]);
+  assert.equal(t.palette.accent, '#90465e');
+});
+test('the local calendar follows midnight across daylight saving transitions', () => {
+  const day = (d) => localMidnight(d, 'America/Chicago');
+  assert.equal(day('2026-03-09') - day('2026-03-08'), 23 * 3600000);
+  assert.equal(day('2026-11-02') - day('2026-11-01'), 25 * 3600000);
+  const at = new Date('2026-03-01T02:00:00Z');
+  assert.equal(localDate(at), '2026-02-28');
+  assert.equal(themeFor(at, '', 'Asia/Tokyo').season, 'spring');
+  assert.equal(themeFor(at).season, 'winter');
+});
+test('multi-day, floating and overlapping observances retain their individual identities', () => {
+  const at = new Date('2026-01-01T18:00:00Z');
+  assert.equal(themeFor(at).id, 'new-year');
+  assert.equal(themeFor(at, 'kwanzaa').id, 'kwanzaa');
+  assert.equal(holidaysFor(2026).find((h) => h.id === 'thanksgiving').date, '2026-11-26');
+  for (const id of ['hanukkah', 'eid-fitr', 'eid-adha'])
+    assert.ok(holidaysFor(2026).some((h) => h.id === id));
+});
+test('preview snapping and adjacent jumps include leap years', () => {
+  const points = occasionPoints(2028);
+  const valentines = points.find((p) => p.id === 'valentines');
+  assert.equal(snapOccasionDay(2028, valentines.day - 2), valentines.day);
+  assert.equal(adjacentOccasionDay(2028, 365, 1), 365);
+  assert.equal(adjacentOccasionDay(2026, 0, -1), 0);
+});

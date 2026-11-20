@@ -1,0 +1,147 @@
+:host {
+  display: block;
+  color: var(--season-strong, #294638);
+  accent-color: var(--season-accent, #416d4b);
+  font:
+    1rem/1.5 system-ui,
+    sans-serif;
+  --mark-detail: var(--season-secondary);
+  --mark-cut: var(--season-page);
+}
+* {
+  box-sizing: border-box;
+}
+details {
+  background: var(--season-page, #fff);
+  border: 1px solid var(--season-border, #b4bdb5);
+  border-radius: 0.75rem;
+}
+summary,
+button,
+select,
+input[type='range'] {
+  cursor: pointer;
+}
+summary {
+  padding: 0.9rem 1rem;
+}
+summary svg {
+  width: 1.65em;
+  height: 1.65em;
+  vertical-align: middle;
+  fill: var(--season-accent);
+  margin-inline: 0.25em 0.5em;
+}
+summary strong {
+  margin-inline-start: 0.8em;
+  overflow-wrap: anywhere;
+}
+.controls {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.1rem;
+  border-top: 1px solid var(--season-border);
+}
+.date,
+.pickers,
+#weather,
+.months {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.date {
+  justify-content: space-between;
+}
+output {
+  font-weight: 650;
+}
+label,
+legend {
+  font-weight: 600;
+}
+button,
+select {
+  font: inherit;
+  padding: 0.35em 0.65em;
+  border: 1px solid var(--season-accent, #416d4b);
+  border-radius: 0.35rem;
+  color: inherit;
+  background: var(--season-page);
+  max-width: 100%;
+}
+button:hover {
+  background: var(--season-soft);
+}
+button[aria-pressed='true'] {
+  background: var(--season-strong);
+  color: var(--season-page);
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+input[type='range'] {
+  width: 100%;
+  margin: 0;
+}
+.ticks {
+  position: relative;
+  height: 0.4rem;
+  margin: -0.65rem 0.5rem 0;
+}
+.ticks i {
+  position: absolute;
+  height: 100%;
+  border-inline-start: 1px solid var(--season-accent);
+}
+.months {
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+.months button {
+  border: 0;
+  padding: 0.2rem;
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+.pickers label {
+  display: grid;
+  gap: 0.3rem;
+  max-width: 100%;
+}
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0.3rem 0 0;
+  min-width: 0;
+}
+legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+}
+p {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: var(--season-weather-z, 8);
+}
+.atmosphere > .weather-sun:not(.weather-night) {
+  opacity: 1;
+}
+.atmosphere > .weather-night {
+  opacity: 0.13;
+}
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere {
+    display: none;
+  }
+}

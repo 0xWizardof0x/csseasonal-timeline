@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Season Timeline · Field Notes</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--season-page, #f1f7df);
+        color: var(--season-strong, #2e5339);
+        font:
+          1rem/1.55 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 55rem;
+        margin: auto;
+        padding: clamp(1rem, 5vw, 4rem);
+      }
+      h1 {
+        font:
+          normal clamp(2.8rem, 8vw, 5.8rem) / 0.95 Georgia,
+          serif;
+        letter-spacing: -0.06em;
+        margin: 1.4rem 0 1rem;
+      }
+      header {
+        border-block: 1px solid var(--season-border, #bfd0a8);
+        padding: 0.6rem 0;
+      }
+      header,
+      .swatches {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      header span {
+        font-size: 0.9rem;
+        font-weight: 650;
+      }
+      .swatches i {
+        width: 1.15rem;
+        height: 1.15rem;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+      }
+      p {
+        max-width: 48ch;
+        margin: 1rem 0 2rem;
+      }
+      footer {
+        margin: 1rem 0;
+        font-size: 0.9rem;
+      }
+      a {
+        color: inherit;
+      }
+    </style>
+    <script type="module" src="./src/season-timeline.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span>Season Timeline</span>
+        <div class="swatches" aria-hidden="true">
+          <i style="background: var(--season-accent)"></i
+          ><i style="background: var(--season-strong)"></i> <i style="background: var(--season-soft)"></i
+          ><i style="background: var(--season-secondary)"></i>
+        </div>
+      </header>
+      <h1>Field notes.</h1>
+      <p>
+        Scrub through a year in Chicago. The page takes its colors from the calendar. Pick a weather
+        effect to see what it looks like over your own content.
+      </p>
+      <season-timeline page-theme live-weather open storage-key="season-timeline-demo"></season-timeline>
+      <footer>
+        <a href="https://github.com/0xWizardof0x/season-timeline">Source and installation</a>
+      </footer>
+    </main>
+  </body>
+</html>
