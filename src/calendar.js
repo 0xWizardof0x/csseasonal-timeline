@@ -341,7 +341,8 @@ export function holidaysFor(year) {
       endDate: iso(year + 1, 1, 1),
       palette: 'kwanzaa',
       symbol: '✦'
-    }
+    },
+    { id: 'new-years-eve', label: 'New Year’s Eve', date: iso(year, 12, 31), palette: 'new-year', symbol: '✦' }
   ];
   holidayCache.set(year, result);
   return result;

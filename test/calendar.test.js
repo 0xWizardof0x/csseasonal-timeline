@@ -41,6 +41,18 @@ test('multi-day, floating and overlapping observances retain their individual id
   for (const id of ['hanukkah', 'eid-fitr', 'eid-adha'])
     assert.ok(holidaysFor(2026).some((h) => h.id === id));
 });
+test('New Year’s Eve marks December 31 until local midnight', () => {
+  for (const [year, lastDay] of [[2026, 364], [2028, 365]]) {
+    const eve = occasionPoints(year).find((p) => p.id === 'new-years-eve');
+    assert.equal(eve.date, year + '-12-31');
+    assert.equal(eve.day, lastDay);
+    const midnight = localMidnight((year + 1) + '-01-01', 'America/Chicago');
+    const before = themeFor(new Date(midnight - 1));
+    assert.equal(before.id, eve.id);
+    assert.ok(before.activeOccasions.some((p) => p.id === 'kwanzaa'));
+    assert.equal(themeFor(new Date(midnight)).id, 'new-year');
+  }
+});
 test('preview snapping and adjacent jumps include leap years', () => {
   const points = occasionPoints(2028);
   const valentines = points.find((p) => p.id === 'valentines');
