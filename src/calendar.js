@@ -182,6 +182,14 @@ const holidayPalettes = {
     secondary: '#b99a51',
     border: '#b29bbf'
   },
+  'dia-de-los-muertos': {
+    accent: '#a75223',
+    strong: '#4c2e55',
+    page: '#fff4df',
+    soft: '#efc184',
+    secondary: '#df9530',
+    border: '#c79a73'
+  },
   halloween: {
     accent: '#69507f',
     strong: '#4b385f',
@@ -325,6 +333,14 @@ export function holidaysFor(year) {
       symbol: '❧'
     },
     { id: 'halloween', label: 'Halloween', date: iso(year, 10, 31), palette: 'halloween', symbol: '☾' },
+    {
+      id: 'dia-de-los-muertos',
+      label: 'Día de los Muertos',
+      date: iso(year, 11, 1),
+      endDate: iso(year, 11, 2),
+      palette: 'dia-de-los-muertos',
+      symbol: '✿'
+    },
     { id: 'veterans', label: 'Veterans Day', date: iso(year, 11, 11), palette: 'veterans', symbol: '★' },
     {
       id: 'thanksgiving',
@@ -338,11 +354,11 @@ export function holidaysFor(year) {
       id: 'kwanzaa',
       label: 'Kwanzaa',
       date: iso(year, 12, 26),
-      endDate: iso(year + 1, 1, 1),
+      endDate: iso(year, 12, 26),
       palette: 'kwanzaa',
       symbol: '✦'
     },
-    { id: 'new-years-eve', label: 'New Year’s Eve', date: iso(year, 12, 31), palette: 'new-year', symbol: '✦' }
+    { id: 'new-years-eve', label: 'New Year’s Eve', date: iso(year, 12, 31), endDate: iso(year, 12, 31), palette: 'new-year', symbol: '✦' }
   ];
   holidayCache.set(year, result);
   return result;
@@ -413,6 +429,10 @@ function windowsFor(year, timeZone) {
   }
   return occurrenceCache.get(key);
 }
+function isYearEndBreak(date) {
+  const monthDay = date.slice(5);
+  return monthDay >= '12-27' && monthDay <= '12-30';
+}
 export function themeFor(at = new Date(), preferredId = '', timeZone = defaultZone) {
   const date = localDate(at, timeZone),
     month = +date.slice(5, 7),
@@ -427,7 +447,10 @@ export function themeFor(at = new Date(), preferredId = '', timeZone = defaultZo
           : 'winter';
   const occurrences = windowsFor(year, timeZone);
   // The selected occasion wins when two observances overlap.
-  const candidates = occurrences.filter((day) => at.getTime() >= day.start && at.getTime() < day.end);
+  const winterBreak = isYearEndBreak(date);
+  const candidates = occurrences.filter((day) =>
+    at.getTime() >= day.start && at.getTime() < day.end && (!winterBreak || day.id === preferredId)
+  );
   const isObserved = (day) => date >= day.date && date <= (day.endDate || day.date);
   const activeOccasions = candidates.filter(isObserved);
   const holiday = candidates.sort(
@@ -468,6 +491,7 @@ export function occasionPoints(year) {
 export function snapOccasionDay(year, day, radius = 3) {
   const last = (Date.UTC(year + 1, 0, 1) - Date.UTC(year, 0, 1)) / 86400000 - 1;
   const bounded = Math.max(0, Math.min(last, Math.round(day)));
+  if (isYearEndBreak(addDays(iso(year, 1, 1), bounded))) return bounded;
   const nearest = occasionPoints(year).reduce((best, item) =>
     Math.abs(item.day - bounded) < Math.abs(best.day - bounded) ? item : best
   );

@@ -36,10 +36,20 @@ test('the local calendar follows midnight across daylight saving transitions', (
 test('multi-day, floating and overlapping observances retain their individual identities', () => {
   const at = new Date('2026-01-01T18:00:00Z');
   assert.equal(themeFor(at).id, 'new-year');
-  assert.equal(themeFor(at, 'kwanzaa').id, 'kwanzaa');
+  assert.ok(!themeFor(at).activeOccasions.some((p) => p.id === 'kwanzaa'));
   assert.equal(holidaysFor(2026).find((h) => h.id === 'thanksgiving').date, '2026-11-26');
   for (const id of ['hanukkah', 'eid-fitr', 'eid-adha'])
     assert.ok(holidaysFor(2026).some((h) => h.id === id));
+});
+test('Día de los Muertos follows Halloween and covers both local calendar days', () => {
+  const id = 'dia-de-los-muertos';
+  for (const zone of ['America/Chicago', 'America/Mexico_City']) {
+    const at = (date) => themeFor(new Date(localMidnight(date, zone)), '', zone).id;
+    assert.equal(at('2026-10-31'), 'halloween');
+    assert.equal(at('2026-11-01'), id);
+    assert.equal(at('2026-11-02'), id);
+    assert.equal(at('2026-11-03'), 'autumn');
+  }
 });
 test('New Year’s Eve marks December 31 until local midnight', () => {
   for (const [year, lastDay] of [[2026, 364], [2028, 365]]) {
@@ -49,8 +59,23 @@ test('New Year’s Eve marks December 31 until local midnight', () => {
     const midnight = localMidnight((year + 1) + '-01-01', 'America/Chicago');
     const before = themeFor(new Date(midnight - 1));
     assert.equal(before.id, eve.id);
-    assert.ok(before.activeOccasions.some((p) => p.id === 'kwanzaa'));
+    assert.ok(!before.activeOccasions.some((p) => p.id === 'kwanzaa'));
     assert.equal(themeFor(new Date(midnight)).id, 'new-year');
+  }
+});
+test('the Kwanzaa theme ends at midnight and the last four ordinary days stay selectable', () => {
+  assert.equal(themeFor(new Date('2027-12-28T18:00:00Z'), 'hanukkah').id, 'hanukkah');
+  for (const year of [2026, 2027, 2028]) {
+    const start = localMidnight(year + '-12-26');
+    assert.equal(themeFor(new Date(start)).id, 'kwanzaa');
+    assert.equal(themeFor(new Date(localMidnight(year + '-12-27') - 1)).id, 'kwanzaa');
+    for (const day of [27, 28, 29, 30]) {
+      const date = year + '-12-' + day;
+      assert.equal(themeFor(new Date(localMidnight(date))).id, 'winter');
+      const index = (Date.parse(date) - Date.UTC(year, 0, 1)) / 86400000;
+      assert.equal(snapOccasionDay(year, index), index);
+    }
+    assert.equal(themeFor(new Date(localMidnight(year + '-12-31'))).id, 'new-years-eve');
   }
 });
 test('preview snapping and adjacent jumps include leap years', () => {
