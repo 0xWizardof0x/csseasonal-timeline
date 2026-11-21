@@ -1,4 +1,4 @@
-/* Season Timeline. Calendar rules and palettes from Magical Minds, CivicLine and Buenos Días. */
+/* CSSeasonal. Calendar rules and palettes from Magical Minds, CivicLine and Buenos Días. */
 const addDays = (date, days) =>
   new Date(Date.parse(date + 'T12:00:00Z') + days * 86400000).toISOString().slice(0, 10);
 
@@ -79,12 +79,12 @@ const holidayPalettes = {
     border: '#9284bc'
   },
   'new-year': {
-    accent: '#ad4e28',
-    strong: '#653324',
-    page: '#fff4de',
-    soft: '#ffd59e',
-    secondary: '#d47d2b',
-    border: '#cf9c75'
+    accent: '#25765a',
+    strong: '#123e32',
+    page: '#fff5ce',
+    soft: '#f5da86',
+    secondary: '#b88724',
+    border: '#beaa6d'
   },
   presidents: {
     accent: '#526e8a',
@@ -289,7 +289,7 @@ export function holidaysFor(year) {
   if (cached) return cached;
   const result = [
     ...lunarOccasions(year),
-    { id: 'new-year', label: 'New Year’s Day', date: iso(year, 1, 1), palette: 'new-year', symbol: '☀' },
+    { id: 'new-year', label: 'New Year’s Day', date: iso(year, 1, 1), palette: 'new-year', symbol: '▦' },
     {
       id: 'mlk',
       label: 'Martin Luther King Jr. Day',

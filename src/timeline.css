@@ -152,7 +152,11 @@ details[data-occasion='new-years-eve'] > summary {
   --mark-detail: var(--season-secondary);
 }
 details[data-occasion='new-year'] > summary {
-  background: linear-gradient(170deg, var(--season-page) 20%, var(--season-soft) 78%, #f2b887);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 20px, #b88724 20px 22px) 0 100% / 100% 3px no-repeat,
+    repeating-linear-gradient(90deg, transparent 0 20px, #b88724 20px 22px) 11px calc(100% - 4px) / 100% 2px no-repeat,
+    linear-gradient(to top, #efc662 0 3px, #b88724 3px 4px, #efc662 4px 6px, transparent 6px),
+    linear-gradient(110deg, var(--season-page), var(--season-soft));
   color: var(--season-strong);
 }
 details:is([data-occasion='new-years-eve'], [data-occasion='new-year']) > summary {

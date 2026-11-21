@@ -4,18 +4,18 @@ Give a website a seasonal palette that follows the date. Visitors can scrub the 
 
 ## Try the demo
 
-[Open the live demo on GitHub Pages](https://0xwizardof0x.github.io/csseason-timeline/). Try a holiday from the occasion menu, then switch between sun, rain, snow, wind and storms.
+[Open the live demo on GitHub Pages](https://0xwizardof0x.github.io/csseasonal-timeline/). Try a holiday from the occasion menu, then switch between sun, rain, snow, wind and storms.
 
-![The timeline displaying the autumn palette and live Chicago weather](./demo/preview.jpg)
+![CSSeasonal showing the gold and emerald New Year’s Day theme](./demo/preview.jpg)
 
 Clone this repository, run `python3 -m http.server 8000` in its root, and open <http://localhost:8000>. The root `index.html` is also ready to serve on a static host, including under a subdirectory.
 
 ## Add it to a site
 
-Copy the entire `src/` directory into your static site, e.g. as `vendor/season-timeline/`. Keep its JS, CSS and SVG files together on the same origin. Add the following markup anywhere in the page.
+Copy the entire `src/` directory into your static site, e.g. as `vendor/csseasonal/`. Keep its JS, CSS and SVG files together on the same origin. Add the following markup anywhere in the page.
 
 ```html
-<script type="module" src="./vendor/season-timeline/season-timeline.js"></script>
+<script type="module" src="./vendor/csseasonal/season-timeline.js"></script>
 <season-timeline page-theme></season-timeline>
 
 <style>
@@ -44,7 +44,7 @@ Set attributes before mounting. Weather data comes from the National Weather Ser
 ## Use just the calendar
 
 ```js
-import {themeFor} from './vendor/season-timeline/calendar.js';
+import {themeFor} from './vendor/csseasonal/calendar.js';
 
 const theme = themeFor(new Date('2026-02-14T18:00:00Z'), '', 'America/Chicago');
 console.log(theme.id, theme.season, theme.palette); // valentines, winter, six color tokens

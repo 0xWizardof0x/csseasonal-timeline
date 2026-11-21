@@ -39,7 +39,7 @@ template.innerHTML = `
   <link rel="stylesheet" href="${asset('./timeline.css')}">
   <link rel="stylesheet" href="${asset('./weather-effects.css')}">
   <details>
-    <summary><svg viewBox="0 0 24 24" aria-hidden="true"><use></use></svg><span>Season timeline</span><strong id="brief"></strong></summary>
+    <summary><svg viewBox="0 0 24 24" aria-hidden="true"><use></use></svg><span>CSSeasonal</span><strong id="brief"></strong></summary>
     <div class="controls">
       <div class="date"><output id="date"></output><button id="today" type="button">Back to today</button></div>
       <label for="day">Preview a date</label><input id="day" type="range" min="0" max="364">
