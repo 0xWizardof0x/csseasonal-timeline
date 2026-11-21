@@ -60,7 +60,10 @@ test('New Year’s Eve marks December 31 until local midnight', () => {
     const before = themeFor(new Date(midnight - 1));
     assert.equal(before.id, eve.id);
     assert.ok(!before.activeOccasions.some((p) => p.id === 'kwanzaa'));
-    assert.equal(themeFor(new Date(midnight)).id, 'new-year');
+    const morning = themeFor(new Date(midnight));
+    assert.equal(morning.id, 'new-year');
+    assert.notDeepEqual(before.palette, morning.palette);
+    assert.notEqual(before.symbol, morning.symbol);
   }
 });
 test('the Kwanzaa theme ends at midnight and the last four ordinary days stay selectable', () => {

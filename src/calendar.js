@@ -70,13 +70,21 @@ const holidayPalettes = {
     secondary: '#c43e4c',
     border: '#a9bbd9'
   },
+  'new-years-eve': {
+    accent: '#534395',
+    strong: '#211a4b',
+    page: '#f2edff',
+    soft: '#c7bcf2',
+    secondary: '#f0bf58',
+    border: '#9284bc'
+  },
   'new-year': {
-    accent: '#575275',
-    strong: '#333b61',
-    page: '#f3eff9',
-    soft: '#d4c9e7',
-    secondary: '#b8994e',
-    border: '#b8a068'
+    accent: '#ad4e28',
+    strong: '#653324',
+    page: '#fff4de',
+    soft: '#ffd59e',
+    secondary: '#d47d2b',
+    border: '#cf9c75'
   },
   presidents: {
     accent: '#526e8a',
@@ -281,7 +289,7 @@ export function holidaysFor(year) {
   if (cached) return cached;
   const result = [
     ...lunarOccasions(year),
-    { id: 'new-year', label: 'New Year’s Day', date: iso(year, 1, 1), palette: 'new-year', symbol: '✦' },
+    { id: 'new-year', label: 'New Year’s Day', date: iso(year, 1, 1), palette: 'new-year', symbol: '☀' },
     {
       id: 'mlk',
       label: 'Martin Luther King Jr. Day',
@@ -358,7 +366,7 @@ export function holidaysFor(year) {
       palette: 'kwanzaa',
       symbol: '✦'
     },
-    { id: 'new-years-eve', label: 'New Year’s Eve', date: iso(year, 12, 31), endDate: iso(year, 12, 31), palette: 'new-year', symbol: '✦' }
+    { id: 'new-years-eve', label: 'New Year’s Eve', date: iso(year, 12, 31), endDate: iso(year, 12, 31), palette: 'new-years-eve', symbol: '✺' }
   ];
   holidayCache.set(year, result);
   return result;

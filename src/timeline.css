@@ -145,3 +145,20 @@ a {
     display: none;
   }
 }
+
+details[data-occasion='new-years-eve'] > summary {
+  background: linear-gradient(112deg, #11112e, var(--season-strong) 65%, #3a2869);
+  color: var(--season-page);
+  --mark-detail: var(--season-secondary);
+}
+details[data-occasion='new-year'] > summary {
+  background: linear-gradient(170deg, var(--season-page) 20%, var(--season-soft) 78%, #f2b887);
+  color: var(--season-strong);
+}
+details:is([data-occasion='new-years-eve'], [data-occasion='new-year']) > summary {
+  border-radius: inherit;
+}
+details[open]:is([data-occasion='new-years-eve'], [data-occasion='new-year']) > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

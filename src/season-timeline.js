@@ -215,6 +215,7 @@ export class SeasonTimeline extends HTMLElement {
       if (themeKey !== key) {
         themeKey = key;
         applyTheme(target, theme);
+        view.querySelector('details').dataset.occasion = theme.holiday?.id || '';
         const year = Number(theme.date.slice(0, 4));
         if (lastYear !== year) fillYear(year);
         years.value = year;
