@@ -1,10 +1,10 @@
-# Season Timeline
+# CSSeasonal
 
 Give a website a seasonal palette that follows the date. Visitors can scrub the year, jump to an occasion, or preview weather over the viewport. The calendar, occasion artwork, and weather renderers come from Magical Minds, CivicLine and Buenos Días. The widget uses native JavaScript modules, CSS, SVG and canvas. It has no runtime dependencies.
 
 ## Try the demo
 
-[Open the live demo on GitHub Pages](https://0xwizardof0x.github.io/season-timeline/). Try a holiday from the occasion menu, then switch between sun, rain, snow, wind and storms.
+[Open the live demo on GitHub Pages](https://0xwizardof0x.github.io/csseason-timeline/). Try a holiday from the occasion menu, then switch between sun, rain, snow, wind and storms.
 
 ![The timeline displaying the autumn palette and live Chicago weather](./demo/preview.jpg)
 
